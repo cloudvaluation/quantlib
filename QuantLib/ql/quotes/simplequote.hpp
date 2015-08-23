@@ -42,6 +42,7 @@ namespace QuantLib {
         //@{
         //! returns the difference between the new value and the old value
         Real setValue(Real value = Null<Real>());
+		Real setValueSilent(Real value = Null<Real>());
         void reset();
         //@}
       private:
@@ -70,6 +71,14 @@ namespace QuantLib {
         }
         return diff;
     }
+
+	inline Real SimpleQuote::setValueSilent(Real value) {
+		Real diff = value - value_;
+		if (diff != 0.0) {
+			value_ = value;
+		}
+		return diff;
+	}
 
     inline void SimpleQuote::reset() {
         setValue(Null<Real>());
